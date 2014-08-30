@@ -11,9 +11,9 @@
 namespace Webiny\Component\StdLib;
 
 /**
- * Description
+ * SingletonTrait is a helper, once implemented on a class, automatically adds the singleton pattern to that class.
  *
- * @package         Webiny\StdLib
+ * @package         Webiny\Component\StdLib
  */
 
 trait SingletonTrait
@@ -21,7 +21,10 @@ trait SingletonTrait
     protected static $_wfInstance;
 
     /**
-     * @return $this;
+     * Return the current instance.
+     * If instance doesn't exist, a new instance will be created.
+     *
+     * @return $this
      */
     final public static function getInstance()
     {
@@ -59,10 +62,16 @@ trait SingletonTrait
     {
     }
 
+    /**
+     * Declare it as private.
+     */
     final private function __wakeup()
     {
     }
 
+    /**
+     * Declare it as private.
+     */
     final private function __clone()
     {
     }

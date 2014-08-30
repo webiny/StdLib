@@ -13,7 +13,7 @@ namespace Webiny\Component\StdLib;
 /**
  * Standard object trait. Use this functions whenever you want to create a standard object.
  *
- * @package         Webiny\StdLib
+ * @package         Webiny\Component\StdLib
  */
 trait StdObjectTrait
 {

@@ -19,9 +19,6 @@ use Webiny\Component\StdLib\StdObject\StringObject\ValidatorTrait;
  * String standard object.
  * This is a helper class for working with strings.
  *
- * Example:
- * $s = new StringObject('some string');
- *
  * @package         Webiny\Component\StdLib\StdObject\StringObject
  */
 class StringObject extends StdObjectAbstract

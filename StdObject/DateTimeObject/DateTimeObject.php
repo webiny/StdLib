@@ -15,9 +15,6 @@ use Webiny\Component\StdLib\StdObject\StringObject\StringObject;
  * Date standard object.
  * Class that enables you to work with dates and time much easier.
  *
- * Example:
- * $dt = new DateTimeObject('3 days ago');
- *
  * @package         Webiny\Component\StdLib\StdObject\DateTimeObject
  */
 class DateTimeObject extends StdObjectAbstract

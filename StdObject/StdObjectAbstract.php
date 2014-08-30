@@ -48,6 +48,7 @@ abstract class StdObjectAbstract implements StdObjectInterface
 
     /**
      * Returns an instance to current object.
+     *
      * @return $this
      */
     protected function _getObject()

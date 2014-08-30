@@ -15,13 +15,10 @@ use Webiny\Component\StdLib\ValidatorTrait;
 /**
  * Standard object validator trait.
  *
- * @package         WebinyFramework
- * @category        StdLib
- * @subcategory     StdObject
+ * @package         Webiny\Component\StdLib\StdObject
  */
 trait StdObjectValidatorTrait
 {
     use ValidatorTrait;
-
 
 }

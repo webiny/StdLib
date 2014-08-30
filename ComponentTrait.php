@@ -14,9 +14,10 @@ use Webiny\Component\ServiceManager\ServiceManager;
 use Webiny\Component\StdLib\StdObject\StringObject\StringObject;
 
 /**
- * Description
+ * Component trait is a helper that automatically parses the component configuration, registers defined class loader
+ * maps and services.
  *
- * @package         WebinyFramework
+ * @package         Webiny\Component\StdLib
  */
 trait ComponentTrait
 {

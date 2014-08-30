@@ -13,7 +13,7 @@ use Webiny\Component\StdLib\Exception\Exception;
  * FactoryLoader provides a simple function that can load classes, pass arguments to their constructors and validate
  * if the created instance implements, or extends, a defined class or interface.
  *
- * @package         Webiny\StdLib
+ * @package         Webiny\Component\StdLib
  */
 trait FactoryLoaderTrait
 {

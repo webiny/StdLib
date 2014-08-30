@@ -13,9 +13,7 @@ namespace Webiny\Component\StdLib\StdObject;
 /**
  * Standard object manipulator trait.
  *
- * @package            WebinyFramework
- * @category           StdLib
- * @subcategory        StdObject
+ * @package            Webiny\Component\StdLib\StdObject
  */
 
 trait StdObjectManipulatorTrait

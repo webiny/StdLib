@@ -19,9 +19,6 @@ use Webiny\Component\StdLib\StdObject\StdObjectAbstract;
  * Url standard object.
  * If you want to extract parameters from a url, or to build/change its parts, this is a class for that.
  *
- * Example usage:
- * $url = new UrlObject('http://www.webiny.com?theBest=true');
- *
  * @package         Webiny\Component\StdLib\StdObject\UrlObject
  */
 class UrlObject extends StdObjectAbstract

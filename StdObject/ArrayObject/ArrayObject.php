@@ -21,9 +21,6 @@ use Webiny\Component\StdLib\StdObject\StringObject\StringObject;
  * Array standard object.
  * This is a helper class for working with arrays.
  *
- * Example:
- * $array = new ArrayObject(['one', 'two', 'three']);
- *
  * @package         Webiny\Component\StdLib\StdObject\ArrayObject
  */
 class ArrayObject extends StdObjectAbstract implements \IteratorAggregate, \ArrayAccess, \Countable

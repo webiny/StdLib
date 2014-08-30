@@ -11,9 +11,9 @@
 namespace Webiny\Component\StdLib;
 
 /**
- * A library of standard functions
+ * Helper trait with some standard functions.
  *
- * @package         Webiny\StdLib
+ * @package         Webiny\Component\StdLib
  */
 trait StdLibTrait
 {
