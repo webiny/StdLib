@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="../../autoloader.php"
+         bootstrap="vendor/autoload.php"
         >
     <testsuites>
         <testsuite name="Webiny StdLib Component Test Suite">
