@@ -17,7 +17,8 @@
 	],
 	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.4.0"
+		"php": ">=5.4.0",
+		"webiny/config": "master-dev"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "4.1.*"
