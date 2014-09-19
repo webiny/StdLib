@@ -83,9 +83,10 @@ trait ValidatorTrait
 
         if (!$this->isNumber($offset)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$offset',
-                'integer'
-            ]);
+                    '$offset',
+                    'integer'
+                ]
+            );
         }
 
         // we double-cast the $string param to string, because integer is also a string, but in stripos function integer
@@ -147,16 +148,18 @@ trait ValidatorTrait
     {
         if (!$this->isNumber($num)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$num',
-                'integer'
-            ]);
+                    '$num',
+                    'integer'
+                ]
+            );
         }
 
         if (!$this->isBoolean($inclusive)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$inclusive',
-                'boolean'
-            ]);
+                    '$inclusive',
+                    'boolean'
+                ]
+            );
         }
 
         $length = strlen($this->val());

@@ -67,9 +67,10 @@ trait ManipulatorTrait
         } else {
             if (!$this->isString($char)) {
                 throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                    '$char',
-                    'string'
-                ]);
+                        '$char',
+                        'string'
+                    ]
+                );
             }
 
             $value = trim($this->val(), $char);
@@ -213,9 +214,10 @@ trait ManipulatorTrait
     {
         if (!$this->isString($char)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$char',
-                'string'
-            ]);
+                    '$char',
+                    'string'
+                ]
+            );
         }
         $this->val(ltrim($this->val(), $char));
 
@@ -234,9 +236,10 @@ trait ManipulatorTrait
     {
         if (!$this->isString($char)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$char',
-                'string'
-            ]);
+                    '$char',
+                    'string'
+                ]
+            );
         }
 
         $this->val(rtrim($this->val(), $char));
@@ -257,16 +260,18 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($startPosition)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$startPosition',
-                'integer'
-            ]);
+                    '$startPosition',
+                    'integer'
+                ]
+            );
         }
 
         if (!$this->isNumber($length)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$length',
-                'integer'
-            ]);
+                    '$length',
+                    'integer'
+                ]
+            );
         }
 
         if ($length == 0) {
@@ -313,9 +318,10 @@ trait ManipulatorTrait
     {
         if (!$this->isString($delimiter)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$delimiter',
-                'string'
-            ]);
+                    '$delimiter',
+                    'string'
+                ]
+            );
         }
 
         if ($this->isNull($limit)) {
@@ -323,9 +329,10 @@ trait ManipulatorTrait
         } else {
             if (!$this->isNumber($limit)) {
                 throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                    '$limit',
-                    'integer'
-                ]);
+                        '$limit',
+                        'integer'
+                    ]
+                );
             }
 
             $arr = explode($delimiter, $this->val(), $limit);
@@ -350,9 +357,10 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($chunkSize)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$chunkSize',
-                'integer'
-            ]);
+                    '$chunkSize',
+                    'integer'
+                ]
+            );
         }
 
         $arr = str_split($this->val(), $chunkSize);
@@ -457,16 +465,18 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($chunkSize)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$chunkSize',
-                'integer'
-            ]);
+                    '$chunkSize',
+                    'integer'
+                ]
+            );
         }
 
         if (!$this->isString($endChar)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$endChar',
-                'string'
-            ]);
+                    '$endChar',
+                    'string'
+                ]
+            );
         }
 
         $tmp = array_chunk(preg_split("//u", $this->val(), -1, PREG_SPLIT_NO_EMPTY), $chunkSize);
@@ -578,16 +588,18 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($length)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$length',
-                'integer'
-            ]);
+                    '$length',
+                    'integer'
+                ]
+            );
         }
 
         if (!$this->isString($padString)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$padString',
-                'string'
-            ]);
+                    '$padString',
+                    'string'
+                ]
+            );
         }
 
         $this->val(str_pad($this->val(), $length, $padString, STR_PAD_LEFT));
@@ -608,16 +620,18 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($length)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$length',
-                'integer'
-            ]);
+                    '$length',
+                    'integer'
+                ]
+            );
         }
 
         if (!$this->isString($padString)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$padString',
-                'string'
-            ]);
+                    '$padString',
+                    'string'
+                ]
+            );
         }
 
         $this->val(str_pad($this->val(), $length, $padString, STR_PAD_RIGHT));
@@ -638,16 +652,18 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($length)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$length',
-                'integer'
-            ]);
+                    '$length',
+                    'integer'
+                ]
+            );
         }
 
         if (!$this->isString($padString)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$padString',
-                'string'
-            ]);
+                    '$padString',
+                    'string'
+                ]
+            );
         }
 
         $this->val(str_pad($this->val(), $length, $padString, STR_PAD_BOTH));
@@ -667,9 +683,10 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($multiplier)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$multiplier',
-                'integer'
-            ]);
+                    '$multiplier',
+                    'integer'
+                ]
+            );
         }
         $this->val(str_repeat($this->val(), $multiplier));
 
@@ -700,9 +717,10 @@ trait ManipulatorTrait
     {
         if (!$this->isString($whiteList)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$whiteList',
-                'integer'
-            ]);
+                    '$whiteList',
+                    'integer'
+                ]
+            );
         }
 
         $this->val(strip_tags($this->val(), $whiteList));
@@ -737,23 +755,26 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($length)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$length',
-                'integer'
-            ]);
+                    '$length',
+                    'integer'
+                ]
+            );
         }
 
         if (!$this->isString($break)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$break',
-                'string'
-            ]);
+                    '$break',
+                    'string'
+                ]
+            );
         }
 
         if (!$this->isBool($cut)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$cut',
-                'boolean'
-            ]);
+                    '$cut',
+                    'boolean'
+                ]
+            );
         }
         $this->val(wordwrap($this->val(), $length, $break, $cut));
 
@@ -773,16 +794,18 @@ trait ManipulatorTrait
     {
         if (!$this->isNumber($length)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$length',
-                'integer'
-            ]);
+                    '$length',
+                    'integer'
+                ]
+            );
         }
 
         if (!$this->isString($ellipsis)) {
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$ellipsis',
-                'string'
-            ]);
+                    '$ellipsis',
+                    'string'
+                ]
+            );
         }
 
         if ($this->length() <= $length) {

@@ -53,9 +53,10 @@ class StringObject extends StdObjectAbstract
             }
 
             throw new StringObjectException(StringObjectException::MSG_INVALID_ARG, [
-                '$value',
-                'string'
-            ]);
+                    '$value',
+                    'string'
+                ]
+            );
         }
         $this->_value = (string)$value;
     }
