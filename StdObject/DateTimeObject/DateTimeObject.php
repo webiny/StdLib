@@ -611,9 +611,10 @@ class DateTimeObject extends StdObjectAbstract
     {
         if (!self::$_formatters->key($dateElement)->inArray($format)) {
             throw new DateTimeObjectException(DateTimeObjectException::MSG_INVALID_FORMAT_FOR_ELEMENT, [
-                $format,
-                "get" . ucfirst($dateElement)
-            ]);
+                    $format,
+                    "get" . ucfirst($dateElement)
+                ]
+            );
         }
 
         return $format;

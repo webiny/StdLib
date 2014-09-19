@@ -71,7 +71,10 @@ class UrlObjectTest extends \PHPUnit_Framework_TestCase
     {
         $u = new UrlObject($this->_url2);
 
-        $u->setScheme('ftp')->setHost('google.com////')->setPath('new-path/over-me')->setPort(45)
+        $u->setScheme('ftp')
+          ->setHost('google.com////')
+          ->setPath('new-path/over-me')
+          ->setPort(45)
           ->setQuery(['name' => 'John']);
 
         $this->assertSame('ftp://google.com:45/new-path/over-me?name=John', $u->val());
@@ -90,8 +93,9 @@ class UrlObjectTest extends \PHPUnit_Framework_TestCase
     {
         $u = new UrlObject($this->_url2);
 
-        $u->setQuery(['name'  => 'John',
-                      'query' => 'nothing'
+        $u->setQuery([
+                         'name'  => 'John',
+                         'query' => 'nothing'
                      ], true
         );
 

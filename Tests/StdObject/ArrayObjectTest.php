@@ -48,7 +48,8 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
                              ], [
                                  'value1',
                                  'value2'
-                             ]);
+                             ]
+        );
         $this->assertSame(array(
                               'key1' => 'value1',
                               'key2' => 'value2'
@@ -71,7 +72,8 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
                                  'value3',
                                  'value4',
                                  'value5'
-                             ]);
+                             ]
+        );
         $this->assertSame(array(
                               'key1' => 'value1',
                               'key2' => 'value2'
@@ -85,7 +87,8 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
                                  1,
                                  2,
                                  3
-                             ]);
+                             ]
+        );
         $sum = $a->sum();
         $this->assertSame(6, $sum);
     }

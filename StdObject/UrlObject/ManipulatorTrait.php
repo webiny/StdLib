@@ -150,9 +150,10 @@ trait ManipulatorTrait
                         $query = $query->parseString()->val();
                     } else {
                         throw new UrlObjectException(UrlObjectException::MSG_INVALID_ARG, [
-                            '$query',
-                            'StringObject|ArrayObject|string|array'
-                        ]);
+                                '$query',
+                                'StringObject|ArrayObject|string|array'
+                            ]
+                        );
                     }
                 }
             } else {

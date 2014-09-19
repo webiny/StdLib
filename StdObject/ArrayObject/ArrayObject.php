@@ -50,9 +50,10 @@ class ArrayObject extends StdObjectAbstract implements \IteratorAggregate, \Arra
                 $this->_value = array();
             } else {
                 throw new ArrayObjectException(ArrayObjectException::MSG_INVALID_PARAM, [
-                    '$array',
-                    'array, ArrayObject'
-                ]);
+                        '$array',
+                        'array, ArrayObject'
+                    ]
+                );
             }
         } else {
             if ($this->isInstanceOf($array, $this)) {
