@@ -46,7 +46,7 @@ trait ManipulatorTrait
                     $array[$key] = $value;
                     $this->val($array);
 
-                    return $value;
+                    return $this;
                 }
             }
         }
@@ -72,7 +72,7 @@ trait ManipulatorTrait
             if (strpos($key, '.') !== false) {
                 $keys = explode('.', trim($key, '.'), 2);
                 $targetArray = new ArrayObject($array[$keys[0]]);
-                $targetArray->keyNested($keys[1], $value, true);
+                $value = $targetArray->keyNested($keys[1], $value, true);
                 $this->keyNested($keys[0], $targetArray->val());
             } else {
                 $array[$key] = $value;
@@ -84,6 +84,9 @@ trait ManipulatorTrait
             if (!$setOnlyIfDoesntExist && !$this->isNull($value)) {
                 if (strpos($key, '.') !== false) {
                     $keys = explode('.', trim($key, '.'), 2);
+                    if(!isset($array[$keys[0]])) {
+                        $array[$keys[0]] = [];
+                    }
                     $targetArray = new ArrayObject($array[$keys[0]]);
                     $targetArray->keyNested($keys[1], $value);
                     $this->keyNested($keys[0], $targetArray->val());
@@ -92,7 +95,7 @@ trait ManipulatorTrait
                     $this->val($array);
                 }
 
-                return $value;
+                return $this;
             }
         }
 
@@ -290,7 +293,7 @@ trait ManipulatorTrait
     }
 
     /**
-     * Use current array as keys and will them with $value.
+     * Use current array as keys and fill them with $value.
      * @link http://php.net/manual/en/function.array-fill-keys.php
      *
      * @param mixed $value Value to use for filling.
