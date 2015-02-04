@@ -20,7 +20,8 @@
 		"php": ">=5.4.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "4.1.*"
+		"phpunit/phpunit": "~4",
+		"mybuilder/phpunit-accelerator": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
@@ -29,7 +30,7 @@
 	},
 	"extras": {
 		"branch-alias": {
-			"dev-master": "1.2-dev"
+			"dev-master": "1.0-dev"
 		}
 	}
 }

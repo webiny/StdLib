@@ -263,6 +263,21 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($array, $a->val());
     }
 
+    public function testRemoveKeys()
+    {
+        $array = [
+            'k1' => 'val',
+            'k2' => null,
+            'k3' => false
+        ];
+        $a = new ArrayObject($array);
+        $a->removeKey(['k2', 'k3']);
+
+        unset($array['k2']);
+        unset($array['k3']);
+        $this->assertSame($array, $a->val());
+    }
+
     /**
      * @dataProvider arraySet1
      */
@@ -842,6 +857,17 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('webiny.com', $arr->keyNested('nested.0.url'));
     }
 
+    /**
+     * @dataProvider mergeArrays
+     */
+    public function testMergeSmart($original, $merge, $result)
+    {
+        $a = new ArrayObject($original);
+        $b = new ArrayObject($merge);
+
+        $this->assertEquals($result, $a->mergeSmart($b)->val());
+    }
+
 
     public function arraySet1()
     {
@@ -915,4 +941,82 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function mergeArrays()
+    {
+        return [
+            [
+                'original' => [
+                    'key1' => [
+                        'data1' => 1,
+                        'data2' => [
+                            [
+                                12,
+                                13,
+                                14
+                            ]
+                        ],
+                        'data3' => 3,
+                        'data5' => [
+                            'name' => [
+                                'some',
+                                'data'
+                            ]
+                        ]
+                    ]
+                ],
+                'merge'    => [
+                    'key1' => [
+                        'data1' => 2,
+                        'data2' => [
+                            [
+                                1,
+                                2,
+                                3
+                            ],
+                            [
+                                3,
+                                4,
+                                5
+                            ]
+                        ],
+                        'data4' => 'something',
+                        'data5' => [
+                            'name' => 'WebinyPlatform'
+                        ]
+                    ]
+                ],
+                'result'   =>
+                    [
+                        'key1' =>
+                            [
+                                'data1' => 2,
+                                'data2' =>
+                                    [
+                                        [
+                                            0 => 12,
+                                            1 => 13,
+                                            2 => 14,
+                                        ],
+                                        [
+                                            0 => 1,
+                                            1 => 2,
+                                            2 => 3,
+                                        ],
+                                        [
+                                            0 => 3,
+                                            1 => 4,
+                                            2 => 5,
+                                        ]
+                                    ],
+                                'data3' => 3,
+                                'data5' =>
+                                    [
+                                        'name' => 'WebinyPlatform'
+                                    ],
+                                'data4' => 'something'
+                            ]
+                    ]
+            ]
+        ];
+    }
 }
