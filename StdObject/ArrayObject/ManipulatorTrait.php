@@ -50,6 +50,10 @@ trait ManipulatorTrait
             }
         }
 
+        if(!isset($array[$key])){
+            return $value;
+        }
+
         return $array[$key];
     }
 
@@ -103,9 +107,16 @@ trait ManipulatorTrait
 
         if (strpos($key, '.') !== false) {
             $keys = explode('.', trim($key, '.'), 2);
+            if(!isset($array[$keys[0]])){
+                $array[$keys[0]] = [];
+            }
             $targetArray = new ArrayObject($array[$keys[0]]);
 
             return $targetArray->keyNested($keys[1], $value, true);
+        }
+
+        if(!isset($array[$key])){
+            return $value;
         }
 
         return $array[$key];
@@ -579,19 +590,19 @@ trait ManipulatorTrait
 
         /** @var ArrayObject $array */
         foreach ($array as $key => $value) {
-            if (array_key_exists($key, $this->_value)) {
+            if (array_key_exists($key, $this->value)) {
                 if ($this->isNumber($key)) {
-                    $this->_value[] = $value;
+                    $this->value[] = $value;
                 } elseif (is_array($value) || $this->isInstanceOf($value, $this)) {
-                    $this->_value[$key] = (new self($this->_value[$key]))->mergeSmart($value)->val();
+                    $this->value[$key] = (new self($this->value[$key]))->mergeSmart($value)->val();
                 } else {
-                    $this->_value[$key] = $value;
+                    $this->value[$key] = $value;
                 }
             } else {
                 if ($this->isInstanceOf($value, $this)) {
-                    $this->_value[$key] = $value->val();
+                    $this->value[$key] = $value->val();
                 } else {
-                    $this->_value[$key] = $value;
+                    $this->value[$key] = $value;
                 }
             }
         }
