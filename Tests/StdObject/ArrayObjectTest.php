@@ -817,6 +817,8 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('deepest', $a->keyNested('k2.k3.k4'));
         $this->assertEquals('default', $a->keyNested('k2.k7', 'default', true));
+        $a->keyNested('k3.k7', 'value');
+        $this->assertEquals('value', $a->keyNested('k3.k7'));
     }
 
     public function testSetNestedKeys()
@@ -836,25 +838,6 @@ class ArrayObjectTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('webiny', $a->key('k2.k3.k4'));
         $this->assertEquals('anotherElement', $a->key('k2.k3.k5'));
-    }
-
-    public function testStdClassConversion()
-    {
-        $obj = new \stdClass();
-        $obj->name = 'Webiny';
-        $obj->language = 'PHP';
-
-        $arr = new ArrayObject($obj);
-        $this->assertEquals('Webiny', $arr->key('name'));
-        $this->assertEquals('PHP', $arr->key('language'));
-
-
-        $obj2 = new \stdClass();
-        $obj2->url = 'webiny.com';
-        $obj->nested = [$obj2];
-
-        $arr = new ArrayObject($obj);
-        $this->assertEquals('webiny.com', $arr->keyNested('nested.0.url'));
     }
 
     /**

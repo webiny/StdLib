@@ -26,13 +26,13 @@ class UrlObject extends StdObjectAbstract
 {
     use ValidatorTrait, ManipulatorTrait, StdObjectTrait;
 
-    protected $_value;
+    protected $value;
 
-    private $_scheme = false;
-    private $_host = false;
-    private $_port = '';
-    private $_path = '';
-    private $_query = array();
+    private $scheme = false;
+    private $host = false;
+    private $port = '';
+    private $path = '';
+    private $query = array();
 
 
     /**
@@ -51,9 +51,9 @@ class UrlObject extends StdObjectAbstract
 
         try {
             $value = $this->str($value)->trim();
-            $this->_value = $value->val();
+            $this->value = $value->val();
 
-            $this->_validateUrl();
+            $this->validateUrl();
         } catch (\Exception $e) {
             throw new UrlObjectException(UrlObjectException::MSG_INVALID_URL, [$value]);
         }
@@ -143,42 +143,22 @@ class UrlObject extends StdObjectAbstract
     }
 
     /**
-     * Redirect the current address.
+     * Builds url from current url elements.
      *
-     * @param null|string|array $header
+     * @return $this
      */
-    public function goToUrl($header = null)
+    private function rebuildUrl()
     {
-
-        // is some additional header being set
-        if(!$this->isNull($header)) {
-
-            // if it's numeric, we want to get the header text for that header code
-            if($this->isNumber($header)) {
-                // get header string for the given code
-                $code = $header;
-                $text = $this->_getHeaderResponseString($header);
-
-                // detect the protocol
-                $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
-
-                // issue the first header
-                header($protocol . ' ' . $code . ' ' . $text);
-            } else {
-                if($this->isArray($header)) {
-                    foreach ($header as $h) {
-                        header($h);
-                    }
-                } else {
-                    header($header);
-                }
-            }
-        }
-
-        // do the redirect
-        header('Location:' . $this->val());
-
-        die();
+        $url = self::buildUrl([
+                'scheme' => $this->scheme,
+                'host'   => $this->host,
+                'port'   => $this->port,
+                'path'   => $this->path,
+                'query'  => $this->query
+            ]
+        );
+        $this->val($url->val());
+        return $this;
     }
 
     /**
@@ -188,7 +168,7 @@ class UrlObject extends StdObjectAbstract
      */
     public function getHost()
     {
-        return $this->_host;
+        return $this->host;
     }
 
     /**
@@ -198,7 +178,7 @@ class UrlObject extends StdObjectAbstract
      */
     public function getScheme()
     {
-        return $this->_scheme;
+        return $this->scheme;
     }
 
     /**
@@ -208,7 +188,7 @@ class UrlObject extends StdObjectAbstract
      */
     public function getPort()
     {
-        return $this->_port;
+        return $this->port;
     }
 
     /**
@@ -218,7 +198,7 @@ class UrlObject extends StdObjectAbstract
      */
     public function getQuery()
     {
-        return $this->_query;
+        return $this->query;
     }
 
     /**
@@ -245,10 +225,10 @@ class UrlObject extends StdObjectAbstract
     public function getPath($asStringObject = false)
     {
         if($asStringObject) {
-            return $this->str($this->_path);
+            return $this->str($this->path);
         }
 
-        return $this->_path;
+        return $this->path;
     }
 
     /**
@@ -261,11 +241,11 @@ class UrlObject extends StdObjectAbstract
     public function val($url = null)
     {
         if($this->isNull($url)) {
-            return $this->_value;
+            return $this->value;
         }
 
-        $this->_value = $url;
-        $this->_validateUrl();
+        $this->value = $url;
+        $this->validateUrl();
 
         return $this;
     }
@@ -285,7 +265,7 @@ class UrlObject extends StdObjectAbstract
      *
      * @throws UrlObjectException
      */
-    private function _validateUrl()
+    private function validateUrl()
     {
         $urlData = parse_url($this->val());
 
@@ -297,43 +277,21 @@ class UrlObject extends StdObjectAbstract
         $urlData = $this->arr($urlData);
 
         // scheme
-        $this->_scheme = $urlData->key('scheme', '', true);
+        $this->scheme = $urlData->key('scheme', '', true);
         // host
-        $this->_host = $urlData->key('host', '', true);
+        $this->host = $urlData->key('host', '', true);
         // port
-        $this->_port = $urlData->key('port', '', true);
+        $this->port = $urlData->key('port', '', true);
         // path
-        $this->_path = $urlData->key('path', '', true);
+        $this->path = $urlData->key('path', '', true);
 
         // parse query string
         if($urlData->keyExists('query')) {
             parse_str($urlData->key('query'), $queryData);
             if($this->isArray($queryData)) {
-                $this->_query = $queryData;
+                $this->query = $queryData;
             }
         }
-    }
-
-    /**
-     * Builds url from current url elements.
-     *
-     * @return $this
-     */
-    private function _buildUrl()
-    {
-
-        $url = self::buildUrl([
-                                  'scheme' => $this->_scheme,
-                                  'host'   => $this->_host,
-                                  'port'   => $this->_port,
-                                  'path'   => $this->_path,
-                                  'query'  => $this->_query
-                              ]
-        );
-
-        $this->val($url->val());
-
-        return $this;
     }
 
     /**
@@ -344,7 +302,7 @@ class UrlObject extends StdObjectAbstract
      * @return string
      * @throws UrlObjectException
      */
-    private function _getHeaderResponseString($headerCode)
+    private function getHeaderResponseString($headerCode)
     {
         switch ($headerCode) {
             case 100:
