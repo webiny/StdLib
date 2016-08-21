@@ -24,6 +24,26 @@ trait ManipulatorTrait
     use StdObjectManipulatorTrait;
 
     /**
+     * Generate a UUID (GUID)
+     *
+     * @return string
+     */
+    public static function uuid()
+    {
+        mt_srand((double)microtime() * 10000);
+        $charId = md5(uniqid(rand(), true));
+        $uuid = [
+            substr($charId, 0, 8),
+            substr($charId, 8, 4),
+            substr($charId, 12, 4),
+            substr($charId, 16, 4),
+            substr($charId, 20, 12)
+        ];
+
+        return join('-', $uuid);
+    }
+
+    /**
      * Appends the given string to the current string.
      *
      * @param string $str String you wish to append
@@ -317,6 +337,26 @@ trait ManipulatorTrait
         }
 
         return $this;
+    }
+
+    /**
+     * Replace string using regex
+     *
+     * TODO: unit test
+     *
+     * @param string $pattern The pattern to search for. It can be either a string or an array with strings.
+     * @param mixed  $replacement The string or an array with strings to replace.
+     * @param int    $limit The maximum possible replacements for each pattern in each subject string. Defaults to -1 (no limit).
+     * @param null   $count If specified, this variable will be filled with the number of replacements done.
+     *
+     * @return $this
+     */
+    public function pregReplace($pattern, $replacement, $limit = -1, &$count = null)
+    {
+        $this->val(preg_replace($pattern, $replacement, $this->val(), $limit, $count));
+
+        return $this;
+
     }
 
     /**
@@ -932,7 +972,7 @@ trait ManipulatorTrait
      *
      * @return $this
      */
-    function slug()
+    public function slug()
     {
         // Make sure string is in UTF-8 and strip invalid UTF-8 characters
         $str = mb_convert_encoding($this->val(), 'UTF-8', mb_list_encodings());
@@ -1244,6 +1284,90 @@ trait ManipulatorTrait
         $str = trim($str, $delimiter);
 
         $this->val(mb_strtolower($str, 'UTF-8'));
+
+        return $this;
+    }
+
+    /**
+     * Convert string to kebab-case
+     *
+     * @return $this
+     */
+    public function kebabCase()
+    {
+        $this->pregReplace('/[A-Z]/', '-$0')->caseLower()->replace(['_', ' '], '-')->trim('-');
+
+        return $this;
+    }
+
+    /**
+     * Convert string to snake_case
+     *
+     * @return $this
+     */
+    public function snakeCase()
+    {
+        $this->pregReplace('/[A-Z]/', '_$0')->caseLower()->replace(['-', ' '], '_')->trim('_');
+
+        return $this;
+    }
+
+    /**
+     * Convert string to PascalCase
+     *
+     * @return $this
+     */
+    public function pascalCase()
+    {
+        $this->pregReplace('/[A-Z]/', '-$0')->replace(['-', '_'], ' ')->caseWordUpper()->replace(' ', '');
+
+        return $this;
+    }
+
+    /**
+     * Convert string to camelCase
+     *
+     * @return $this
+     */
+    public function camelCase()
+    {
+        $this->pascalCase()->caseFirstLower();
+
+        return $this;
+    }
+
+    /**
+     * Convert string to kebab-case
+     *
+     * @return $this
+     */
+    public function sentenceCase()
+    {
+        $this->pregReplace('/[A-Z]/', ' $0')->caseLower()->replace(['_', '-'], ' ')->trim(' ')->caseFirstUpper();
+
+        return $this;
+    }
+
+    /**
+     * Convert string to its singular form
+     *
+     * @return $this
+     */
+    public function singularize()
+    {
+        $this->val(Inflection::getInstance()->singularize($this->val()));
+
+        return $this;
+    }
+
+    /**
+     * Convert string to its plural form
+     *
+     * @return $this
+     */
+    public function pluralize()
+    {
+        $this->val(Inflection::getInstance()->pluralize($this->val()));
 
         return $this;
     }

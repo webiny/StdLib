@@ -7,8 +7,9 @@
 
 namespace Webiny\Component\StdLib\StdObject\DateTimeObject;
 
+use MongoDB\BSON\UTCDatetime;
 use Webiny\Component\StdLib\StdObject\ArrayObject\ArrayObject;
-use Webiny\Component\StdLib\StdObject\StdObjectAbstract;
+use Webiny\Component\StdLib\StdObject\AbstractStdObject;
 use Webiny\Component\StdLib\StdObject\StringObject\StringObject;
 
 /**
@@ -17,7 +18,7 @@ use Webiny\Component\StdLib\StdObject\StringObject\StringObject;
  *
  * @package         Webiny\Component\StdLib\StdObject\DateTimeObject
  */
-class DateTimeObject extends StdObjectAbstract
+class DateTimeObject extends AbstractStdObject
 {
     use ValidatorTrait, ManipulatorTrait;
 
@@ -468,13 +469,13 @@ class DateTimeObject extends StdObjectAbstract
     /**
      * Get MongoDate object
      *
-     * @return \MongoDate
+     * @return UTCDatetime
      * @throws DateTimeObjectException
      */
     public function getMongoDate()
     {
-        if (class_exists('MongoDate')) {
-            return new \MongoDate($this->getTimestamp());
+        if (class_exists('MongoDB\BSON\UTCDatetime')) {
+            return new UTCDatetime($this->getTimestamp() * 1000);
         }
         throw new DateTimeObjectException(DateTimeObjectException::MSG_MONGO_EXTENSION_REQUIRED);
     }
